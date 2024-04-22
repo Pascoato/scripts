@@ -92,10 +92,10 @@ required_packages=(
 check_installed "${required_packages[@]}"
 
 # Git configuration
-if [[ $USER == "kunmun" ]]; then
-    print_color "Configuring Git for user 'kunmun'..." "blue"
-    git config --global user.email "kunmun@aospa.co"
-    git config --global user.name "Kunmun"
+if [[ $USER == "pascoato" ]]; then
+    print_color "Configuring Git for user 'pasco'..." "blue"
+    git config --global user.email "viniciuspascoato@gmail.com"
+    git config --global user.name "Pascoato"
     git config --global credential.helper cache
     git config --global credential.helper 'cache --timeout=9999999'
     git config --global gpg.format ssh
@@ -108,7 +108,7 @@ fi
 if [ ! -d "$HOME/.fonts" ]; then
     print_color "Installing patched Nerd Fonts..." "blue"
     mkdir -p ~/.fonts
-    if ! wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.0/JetBrainsMono.zip" -O JetBrainsMono.zip; then
+    if ! wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip" -O JetBrainsMono.zip; then
         print_color "Failed to download Nerd Fonts. Exiting." "red"
         exit 1
     fi
@@ -145,17 +145,6 @@ if ! curl -sS https://starship.rs/install.sh | sh; then
     print_color "Failed to install Starship. Exiting." "red"
     exit 1
 fi
-
-# Setup Gerrit commit-msg hooks
-print_color "Setting up Gerrit commit-msg hooks..." "blue"
-git config --global init.templatedir '~/.git-templates'
-mkdir -p ~/.git-templates/hooks
-if ! curl -Lo ~/.git-templates/hooks/commit-msg http://gerrit.aospa.co/tools/hooks/commit-msg; then
-    print_color "Failed to download Gerrit commit-msg hook. Exiting." "red"
-    exit 1
-fi
-chmod 755 ~/.git-templates/hooks/commit-msg
-echo 'Change-id hooks are been setup successfully'
 
 # Install PixelDrain
 print_color "Installing PixelDrain (pdup)..." "blue"
